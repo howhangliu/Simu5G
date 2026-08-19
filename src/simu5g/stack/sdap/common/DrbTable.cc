@@ -45,6 +45,11 @@ void DrbTable::loadFromJson(const cValueArray *arr)
         if (entry->containsKey("rlcType"))
             ctx.rlcType = aToRlcType(entry->get("rlcType").stdstringValue());
 
+        // trafficClass controls UE-side logical-channel prioritization for
+        // uplink grants. Lower enum values are served first by LcgScheduler.
+        if (entry->containsKey("trafficClass"))
+            ctx.trafficClass = aToLteTrafficClass(entry->get("trafficClass").stdstringValue());
+
         // pduSessionType (optional, default IPv4)
         if (entry->containsKey("pduSessionType"))
             ctx.pduSessionType = aToPduSessionType(entry->get("pduSessionType").stdstringValue());
@@ -116,4 +121,3 @@ void DrbTable::dump(std::ostream& os) const
 }
 
 } // namespace simu5g
-

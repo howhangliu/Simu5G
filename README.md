@@ -124,6 +124,29 @@ Simu5G supports real-time network emulation capabilities. Navigate to
 one of the examples included in the "emulation" folder and take a look
 at the README file included therein.
 
+SDAP uplink QoS configuration
+-----------------------------
+
+An SDAP `drbConfig` entry may include an optional `trafficClass` value, for
+example:
+
+```
+{"drb": 1, "qfiList": [6], "rlcType": "UM", "trafficClass": "CONVERSATIONAL"}
+```
+
+SDAP copies this value into `FlowControlInfo`, where the UE MAC uses it as the
+logical-channel-group class for uplink scheduling. Supported names are
+`CONVERSATIONAL`, `STREAMING`, `INTERACTIVE`, and `BACKGROUND`; omission keeps
+the backward-compatible `BACKGROUND` default.
+
+For SDAP-enabled UE traffic, `Ip2Nic` also preserves the IPv4 ToS byte in
+`FlowControlInfo`, allowing the optional `useDscpAsQfiFallback` classifier to
+derive QFI from DSCP. After filling an NR uplink grant, `NrMacUe` reports the
+aggregate residual backlog of every UL connection in its Buffer Status Report.
+This is necessary when multiple DRBs share one UE: limiting the BSR to channels
+selected in the current grant can make an unscheduled lower-priority DRB
+invisible to the gNB and starve it indefinitely.
+
 Limitations
 -----------
 
