@@ -263,6 +263,12 @@ void Ip2Nic::analyzePacket(inet::Packet *pkt, Ipv4Address srcAddr, Ipv4Address d
     // --- Common preamble ---
     auto lteInfo = pkt->addTagIfAbsent<FlowControlInfo>();
 
+    // Preserve the IPv4 ToS byte for downstream QoS classification. In
+    // particular, NrSdap's optional UE uplink DSCP-to-QFI mapping reads this
+    // field before selecting a DRB. Without this assignment every uplink
+    // packet appears as DSCP/QFI 0, regardless of its IPv4 header.
+    lteInfo->setTypeOfService(typeOfService);
+
     // Traffic category, RLC type (skipped when SDAP handles DRB/RLC assignment)
     if (!hasSdap_) {
         LteTrafficClass trafficCategory = getTrafficCategory(pkt);

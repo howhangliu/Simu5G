@@ -186,6 +186,10 @@ void NrSdap::handleUpperPacket(inet::Packet *pkt)
     auto lteInfo = pkt->getTagForUpdate<FlowControlInfo>();
     lteInfo->setDrbId(drb->drbId);
     lteInfo->setRlcType(drb->rlcType);
+    // The UE MAC groups uplink logical channels by this field. SDAP owns the
+    // QFI-to-DRB decision, so it must also carry the configured DRB priority
+    // down to the logical-channel scheduler.
+    lteInfo->setTraffic(drb->trafficClass);
 
     // Establish the connection unless its PDCP TX entity already exists. The entity
     // registry is authoritative: entities deleted at handover or D2D mode switch get

@@ -59,7 +59,7 @@ simple NrSdap like INrSdap
         string nodeRole @enum("UE", "gNB");  // Node role: "UE" or "gNB" - determines reflective QoS behavior
         string binderModule = default("binder");
         string pdcpMuxModule = default("^.pdcpMux");
-        object drbConfig = default([]);  // JSON array: [{drb, ue, qfiList, rlcType, pduSessionType, upperProtocol, isDefault}, ...]; see banner comment for details
+        object drbConfig = default([]);  // JSON array: [{drb, ue, qfiList, rlcType, trafficClass, pduSessionType, upperProtocol, isDefault}, ...]; trafficClass also selects the UE uplink LCG
         string reflectiveQosTableModule = default("");  // UE only: path to ReflectiveQosTable module (empty = disabled)
         bool useReflectiveQos = default(false); // UE only
         bool useDscpAsQfiFallback = default(false);  // UE only: use IP DSCP value as QFI when no QfiReq or reflective QoS match
