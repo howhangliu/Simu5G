@@ -969,6 +969,13 @@ void LteMacUe::doHandover(MacNodeId targetEnb)
     cellId_ = targetEnb;
 }
 
+void LteMacUe::primeDcUplinkAccess(MacNodeId targetEnb)
+{
+    Enter_Method("primeDcUplinkAccess");
+    cellId_ = targetEnb;
+    bsrTriggered_ = true;
+}
+
 void LteMacUe::deleteQueues(MacNodeId nodeId)
 {
     Enter_Method_Silent();

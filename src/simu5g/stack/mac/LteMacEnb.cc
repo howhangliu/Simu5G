@@ -95,6 +95,16 @@ SchedDiscipline LteMacEnb::getSchedDiscipline(Direction dir)
     }
 }
 
+void LteMacEnb::primeDcUplinkAccess(MacNodeId ueId)
+{
+    Enter_Method("primeDcUplinkAccess");
+    const CarrierInfoMap& carriers = cellInfo_->getCarrierInfoMap();
+    if (carriers.empty())
+        throw cRuntimeError("LteMacEnb::primeDcUplinkAccess: no component carrier configured");
+    for (const auto& [carrierKey, carrierInfo] : carriers)
+        enbSchedulerUl_->signalRac(ueId, carrierInfo.carrierFrequency);
+}
+
 void LteMacEnb::deleteQueues(MacNodeId nodeId)
 {
     Enter_Method_Silent();

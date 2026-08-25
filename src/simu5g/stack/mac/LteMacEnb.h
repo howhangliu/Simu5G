@@ -223,6 +223,13 @@ class LteMacEnb : public LteMacBase
     }
 
     /**
+     * nascTime / uplink FRER: schedule the initial RAC-sized grant for a UE's
+     * dedicated DC-secondary MAC. After that first grant carries a BSR, the
+     * normal uplink scheduler loop takes over.
+     */
+    virtual void primeDcUplinkAccess(MacNodeId ueId);
+
+    /**
      * Getter for cellInfo.
      */
     virtual CellInfo *getCellInfo();
