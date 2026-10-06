@@ -1,7 +1,8 @@
 //
 //                  Simu5G
 //
-// Authors: Mohamed Seliem (University College Cork)
+// Authors: Mohamed Seliem (University College Cork), Afshin Zanganeh,
+//          How-Hang Liu
 //
 // This file is part of a software released under the license included in file
 // "license.pdf". Please read LICENSE and README files before using it.

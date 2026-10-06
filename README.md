@@ -147,6 +147,15 @@ This is necessary when multiple DRBs share one UE: limiting the BSR to channels
 selected in the current grant can make an unscheduled lower-priority DRB
 invisible to the gNB and starve it indefinitely.
 
+For reflective QoS, configure `useReflectiveQos = true` on both the gNB and UE
+SDAP modules, and point the UE's `reflectiveQosTableModule` at its
+`ReflectiveQosTable`. The gNB includes an SDAP header and marks downlink
+packets with RQI, including packets on a dedicated DRB. The UE learns the
+reverse IPv4 flow's QFI from those packets and uses it for matching uplink
+traffic until the rule expires. An explicit `QfiReq` tag takes precedence over
+the learned rule; the optional DSCP fallback is used only when neither is
+available. The network model does not signal these settings through RRC.
+
 Limitations
 -----------
 
