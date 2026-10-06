@@ -2,7 +2,7 @@
 //                  Simu5G
 //
 // Authors: Mohamed Seliem (University College Cork), Andras Varga (OpenSim Ltd),
-//          Afshin Zanganeh, How-Hang Liu
+//          Afshin Zanganeh and How-Hang Liu (Technical University of Dresden)
 //
 // This file is part of a software released under the license included in file
 // "license.pdf". Please read LICENSE and README files before using it.
